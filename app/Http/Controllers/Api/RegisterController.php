@@ -24,7 +24,13 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // You can customize the response here if needed
-        return response()->json(['message' => 'User registered successfully'], 201);
+        // Create token (like Google flow)
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'token' => $token,
+            'user' => $user
+        ], 201);
     }
 }

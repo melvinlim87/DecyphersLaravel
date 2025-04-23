@@ -3,7 +3,10 @@
 import React, { useState } from 'react';
 import api from '../../api';
 
+import { useRouter } from 'next/navigation';
+
 const RegisterPage: React.FC = () => {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +22,11 @@ const RegisterPage: React.FC = () => {
     try {
       const response = await api.post('/register', { name, email, password, password_confirmation: passwordConfirmation });
       console.log('Registration successful:', response.data);
-      // TODO: Redirect to login or dashboard after successful registration
+      const { token } = response.data;
+      if (token) {
+        localStorage.setItem('auth_token', token);
+        router.push('/dashboard');
+      }
     } catch (err: any) {
       console.error('Registration failed:', err);      
       setError(err?.response?.data?.message || 'Registration failed.');
