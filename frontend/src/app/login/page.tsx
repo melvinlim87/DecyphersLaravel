@@ -1,10 +1,38 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import api from "@/api";
 
 export default function LoginPage() {
+  const router = useRouter();
   const telegramDivRef = useRef<HTMLDivElement>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const handleGoogleLogin = () => {
     window.location.href = "http://localhost:8000/api/auth/google/redirect";
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await api.post('/login', { email, password });
+      console.log('Login successful:', response.data);
+      const { token } = response.data;
+      if (token) {
+        localStorage.setItem('auth_token', token);
+        router.push('/dashboard');
+      }
+    } catch (err: any) {
+      console.error('Login failed:', err);
+      setError(err?.response?.data?.message || 'Invalid email or password.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -60,8 +88,75 @@ export default function LoginPage() {
       <div style={{ margin: "32px 0 16px 0" }}>
         <div ref={telegramDivRef}></div>
       </div>
-      {/* Placeholder for email/password login if needed */}
-      {/* <form>...</form> */}
+      {/* Email/Password Login Form */}
+      <form onSubmit={handleLogin} style={{ width: "100%", maxWidth: 400, marginTop: 24 }}>
+        {error && (
+          <div style={{ color: "#f87171", marginBottom: 16, textAlign: "center" }}>
+            {error}
+          </div>
+        )}
+        <div style={{ marginBottom: 16 }}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+            style={{
+              width: "100%",
+              padding: "12px 16px",
+              borderRadius: 6,
+              border: "1px solid #a5b4fc",
+              fontSize: 16,
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              color: "#1f2937",
+            }}
+          />
+        </div>
+        <div style={{ marginBottom: 24 }}>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+            style={{
+              width: "100%",
+              padding: "12px 16px",
+              borderRadius: 6,
+              border: "1px solid #a5b4fc",
+              fontSize: 16,
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              color: "#1f2937",
+            }}
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={isLoading}
+          style={{
+            width: "100%",
+            padding: "12px 16px",
+            backgroundColor: "#4f46e5",
+            color: "white",
+            border: "none",
+            borderRadius: 6,
+            fontSize: 16,
+            fontWeight: 600,
+            cursor: isLoading ? "not-allowed" : "pointer",
+            opacity: isLoading ? 0.7 : 1,
+          }}
+        >
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+      <div style={{ margin: "24px 0", width: "100%", maxWidth: 400, textAlign: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ flex: 1, height: 1, backgroundColor: "rgba(255, 255, 255, 0.3)" }} />
+          <span style={{ margin: "0 16px", color: "#e0e7ff" }}>OR</span>
+          <div style={{ flex: 1, height: 1, backgroundColor: "rgba(255, 255, 255, 0.3)" }} />
+        </div>
+      </div>
       <p style={{ marginTop: 32, color: "#e0e7ff" }}>
         Don't have an account? <a href="/register" style={{ color: "#a5b4fc" }}>Sign up</a>
       </p>

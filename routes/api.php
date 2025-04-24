@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Telegram authentication callback using the TelegramAuthController
 use App\Http\Controllers\TelegramAuthController;
@@ -34,3 +36,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 // Registration route
 Route::post('/register', [RegisterController::class, 'register']);
+
+// Login route
+Route::post('/login', [\App\Http\Controllers\Api\LoginController::class, 'login']);
