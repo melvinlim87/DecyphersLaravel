@@ -1,6 +1,9 @@
 import React from "react";
+import { useRouter } from "next/navigation";
+import { logout } from "@/api";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#f3f4f6" }}>
       {/* Sidebar */}
@@ -88,9 +91,33 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <span style={{ fontSize: 19 }}>👤</span> JamesTests
             </div>
             {/* Logout icon */}
-            <a href="/logout" style={{ color: "#a5b4fc", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: 5, fontSize: 16 }}>
+            <button
+              onClick={async () => {
+                try {
+                  await logout();
+                  // Remove token/user info from localStorage or cookies if used
+                  localStorage.removeItem('auth_token');
+                  localStorage.removeItem('user');
+                  // Redirect to login page
+                  router.push('/login');
+                } catch (error) {
+                  alert('Logout failed');
+                }
+              }}
+              style={{
+                color: "#a5b4fc",
+                fontWeight: 500,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                fontSize: 16
+              }}
+            >
               <span style={{ fontSize: 20 }}>↩️</span> Logout
-            </a>
+            </button>
           </div>
         </header>
         {/* Main content */}

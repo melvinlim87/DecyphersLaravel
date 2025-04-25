@@ -5,29 +5,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
-// Telegram authentication callback using the TelegramAuthController
 use App\Http\Controllers\TelegramAuthController;
+
 Route::match(['GET', 'POST'], '/auth/telegram/callback', [TelegramAuthController::class, 'handleCallback']);
 
+use App\Http\Controllers\Auth\GoogleAuthController;
+
 // Google Socialite login - redirect
-Route::get('/auth/google/redirect', function () {
-    return \Laravel\Socialite\Facades\Socialite::driver('google')->stateless()->redirect();
-});
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
 
 // Google Socialite login - callback
-Route::get('/auth/google/callback', function () {
-    $googleUser = \Laravel\Socialite\Facades\Socialite::driver('google')->stateless()->user();
-    $user = \App\Models\User::firstOrCreate(
-        ['email' => $googleUser->getEmail()],
-        [
-            'name' => $googleUser->getName() ?? $googleUser->getNickname() ?? 'Google User',
-            'password' => \bcrypt(\Illuminate\Support\Str::random(24)),
-        ]
-    );
-    $token = $user->createToken('api-token')->plainTextToken;
-    return \redirect()->away(\env('FRONTEND_URL', 'http://localhost:3000') . '/auth/callback?token=' . $token);
-});
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 
 // Protected user route
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -39,3 +27,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Login route
 Route::post('/login', [\App\Http\Controllers\Api\LoginController::class, 'login']);
+
+// Logout route - protected by auth:sanctum middleware
+Route::middleware(['auth:sanctum'])->post('/logout', [\App\Http\Controllers\Api\LoginController::class, 'logout']);
