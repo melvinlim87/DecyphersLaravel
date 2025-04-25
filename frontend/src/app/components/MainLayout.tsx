@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logout } from "@/api";
 
@@ -30,16 +31,16 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             margin: "0 16px 18px 16px",
             boxShadow: "0 2px 12px rgba(60,60,140,0.06)",
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 700, fontSize: 16, color: "#e0e7ff", marginBottom: 2, letterSpacing: 0.1 }}>
+            <Link href="/ai-chat" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 700, fontSize: 16, color: "#e0e7ff", marginBottom: 2, letterSpacing: 0.1, textDecoration: 'none', cursor: 'pointer' }}>
               <span style={{ fontSize: 20 }}>💬</span> AI Chat Analyzer
-            </div>
+            </Link>
             <div style={{ fontSize: 13, color: "#dbeafe", margin: "10px 0 7px 0", fontWeight: 500 }}>Generate</div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              <li><a href="#" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2 }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</a></li>
-              <li><a href="#" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2 }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</a></li>
-              <li><a href="#" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2 }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</a></li>
-              <li><a href="#" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2 }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</a></li>
-              <li><a href="#" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2 }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Market Analysis - 15M</a></li>
+              <li><Link href="/ai-chat/history" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2, cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</Link></li>
+              <li><Link href="/ai-chat/history" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2, cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</Link></li>
+              <li><Link href="/ai-chat/history" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2, cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</Link></li>
+              <li><Link href="/ai-chat/history" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2, cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Chat - 4/22/2025</Link></li>
+              <li><Link href="/ai-chat/market-analysis" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2, cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> Market Analysis - 15M</Link></li>
             </ul>
             <a href="#" style={{ display: "flex", alignItems: "center", gap: 7, color: "#dbeafe", fontSize: 14, margin: "13px 0 0 0", textDecoration: "none", fontWeight: 500, borderRadius: 7, transition: "background 0.15s", padding: "5px 7px" }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 16 }}>🕒</span> See All History</a>
           </div>
@@ -51,12 +52,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             margin: "0 16px 0 16px",
             boxShadow: "0 2px 12px rgba(60,60,140,0.06)",
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 700, fontSize: 16, color: "#e0e7ff", marginBottom: 2, letterSpacing: 0.1 }}>
+            <Link href="/ea-generator" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 700, fontSize: 16, color: "#e0e7ff", marginBottom: 2, letterSpacing: 0.1, textDecoration: 'none', cursor: 'pointer' }}>
               <span style={{ fontSize: 20 }}>&lt;/&gt;</span> Strategy Generator
-            </div>
+            </Link>
             <div style={{ fontSize: 13, color: "#dbeafe", margin: "10px 0 7px 0", fontWeight: 500 }}>Generate EA</div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              <li><a href="#" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2 }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> EA Generator - Custom...</a></li>
+              <li><Link href="/ea-generator/custom" style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", color: "#e0e7ff", textDecoration: "none", fontSize: 14, borderRadius: 7, transition: "background 0.15s", fontWeight: 500, paddingLeft: 2, paddingRight: 2, cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 11 }}>●</span> EA Generator - Custom...</Link></li>
             </ul>
             <a href="#" style={{ display: "flex", alignItems: "center", gap: 7, color: "#dbeafe", fontSize: 14, margin: "13px 0 0 0", textDecoration: "none", fontWeight: 500, borderRadius: 7, transition: "background 0.15s", padding: "5px 7px" }} onMouseOver={e=>e.currentTarget.style.background='#4f46e5'} onMouseOut={e=>e.currentTarget.style.background='transparent'}><span style={{ fontSize: 16 }}>🕒</span> See All History</a>
           </div>
