@@ -30,3 +30,7 @@ Route::post('/login', [\App\Http\Controllers\Api\LoginController::class, 'login'
 
 // Logout route - protected by auth:sanctum middleware
 Route::middleware(['auth:sanctum'])->post('/logout', [\App\Http\Controllers\Api\LoginController::class, 'logout']);
+
+// OpenRouter API proxy endpoints
+Route::post('/openrouter/chat', [\App\Http\Controllers\OpenRouterController::class, 'sendChatMessage']);
+Route::post('/openrouter/analyze-image', [\App\Http\Controllers\OpenRouterController::class, 'analyzeImage']);
